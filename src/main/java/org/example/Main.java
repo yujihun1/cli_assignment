@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("==게시판 앱==");
+        int lastId = 1;
 
         while (true) {
             System.out.print("명령)");
@@ -20,6 +21,9 @@ public class Main {
                 String subject = sc.nextLine().trim();
                 System.out.print("내용 :");
                 String content = sc.nextLine().trim();
+                System.out.printf("%d번 게시물이 등록되었습니다\n",lastId);
+
+                lastId++;
             }
         }
         sc.close();
