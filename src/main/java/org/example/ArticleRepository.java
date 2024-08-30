@@ -2,26 +2,34 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ArticleRepository {
     List<Article> articleList = new ArrayList<>();
-    int lastId = 1;
+
 
     public int create(String subject, String content) {
-        Article article = new Article(lastId,subject,content);
-        articleList.add(article);
-
-        lastId++;
-
-        return article.getId();
+        String sql = String.format("insert into article set subject='%s', content='%s'", subject, content);
+        int id = Container.getDBConnection().insert(sql);
+        return id;
     }
 
 
     public List<Article> findAll() {
+        List<Article> articleList = new ArrayList<>();
+
+        List<Map<String,Object>> rows =
+                Container.getDBConnection().selectRows("select * from article");
+
+        for(Map<String,Object> row : rows) {
+            Article article = new Article(row);
+            articleList.add(article);
+        }
         return articleList;
     }
 
-    public Article getFindById(int id) {
+    public Article findById(int id) {
+        List<Article> articleList = this.findAll();
         for(Article item: articleList) {
             if(item.getId()==id){
                 return item;
@@ -31,11 +39,13 @@ public class ArticleRepository {
     }
 
     public void remove(Article article) {
-        articleList.remove(article);
+        String sql = String.format("DELETE FROM article where id = %d", article.getId());
+        Container.getDBConnection().delete(sql);
     }
 
-    public void update(Article article, String modifySubject, String modifyContent) {
-        article.setSubject(modifySubject);
-        article.setContent(modifyContent);
+    public void modify(Article article, String modifySubject, String modifyContent) {
+        String sql = String.format("UPDATE article SET subject='%s', content='%s' where id = %d", modifySubject, modifyContent, article.getId());
+        Container.getDBConnection().modify(sql);
+
     }
 }

@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Map;
+
 public class Article {
     int id;
     String subject;
@@ -9,6 +11,12 @@ public class Article {
         this.id=id;
         this.subject=subject;
         this.content=content;
+    }
+
+    Article(Map<String,Object>row){
+        this.id=(int)row.get("id");
+        this.subject=(String)row.get("subject");
+        this.content=(String)row.get("content");
     }
 
      int getId() {
@@ -31,7 +39,7 @@ public class Article {
         this.content=content;
     }
 
-    public void update(Article article, String modifySubject, String modifyContent) {
+    public void modify(Article article, String modifySubject, String modifyContent) {
         article.setSubject(modifySubject);
         article.setContent(modifyContent);
     }

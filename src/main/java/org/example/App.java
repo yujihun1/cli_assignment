@@ -20,11 +20,13 @@ public class App {
         DBConnection.DB_USER="root";
         DBConnection.DB_PASSWORD="";
 
-       DBConnection dbConnection = new DBConnection();
-       dbConnection.connect();
+       //DBConnection dbConnection = new DBConnection();
+      // dbConnection.connect();
 
-        List<Map<String, Object>> rs = dbConnection.selectRows("select * from article");
-        System.out.println(rs);
+        //List<Map<String, Object>> rs = dbConnection.selectRows("select * from article");
+        //System.out.println(rs);
+
+        Container.getDBConnection().connect();
 
 
         articleController = new ArticleController();
@@ -50,7 +52,7 @@ public class App {
             } else if (request.getActionCode().startsWith("삭제")) {
                articleController.delete(request);
             } else if (request.getActionCode().startsWith("수정")) {
-                articleController.update(request);
+                articleController.modify(request);
             }
         }
 

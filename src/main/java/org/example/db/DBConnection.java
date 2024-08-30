@@ -130,7 +130,7 @@ public class DBConnection {
         return affectedRows;
     }
 
-    public int update(String sql) {
+    public int modify(String sql) {
         int affectedRows = 0;
 
         Statement stmt;

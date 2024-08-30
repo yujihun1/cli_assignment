@@ -20,14 +20,14 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
-    public Article getFindById(int id) {
-        return articleRepository.getFindById(id);
+    public Article findById(int id) {
+        return articleRepository.findById(id);
     }
     public void remove(Article article) {
         articleRepository.remove(article);
     }
-    public void update(Article article, String modifySubject, String modifyContent) {
+    public void modify(Article article, String modifySubject, String modifyContent) {
 
-        articleRepository.update(article,modifySubject,modifyContent);
+        articleRepository.modify(article,modifySubject,modifyContent);
     }
 }

@@ -42,7 +42,7 @@ import java.util.Scanner;
             return;
         }
 
-        Article article = this.articleService.getFindById(id);
+        Article article = this.articleService.findById(id);
 
             if (article == null) {
                 System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
@@ -51,7 +51,7 @@ import java.util.Scanner;
                 System.out.printf("%d번 게시물이 삭제되었습니다.\n", id);
             }
         }
-    public void update (Request request) {
+    public void modify (Request request) {
         int id = _getIntParam(request.getParams("id"));
 
         if (id == -1) {
@@ -59,7 +59,7 @@ import java.util.Scanner;
             return;
         }
 
-        Article article = this.articleService.getFindById(id);
+        Article article = this.articleService.findById(id);
 
             if (article == null) {
                 System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
@@ -75,7 +75,7 @@ import java.util.Scanner;
                 String modifyContent = Container.getSc().nextLine();
 
 
-                article.update(article,modifySubject, modifyContent);
+                article.modify(article,modifySubject, modifyContent);
                 System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
             }
         }
