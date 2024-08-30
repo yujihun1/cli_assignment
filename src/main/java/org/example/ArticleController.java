@@ -7,7 +7,9 @@ import java.util.Scanner;
     public class ArticleController {
 
        ArticleService articleService;
-       ArticleController(){
+
+
+       public ArticleController(){
           articleService = new ArticleService();
 
 
