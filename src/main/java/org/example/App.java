@@ -1,8 +1,12 @@
 package org.example;
 
 
+import org.example.db.DBConnection;
+
 import java.util.ArrayList;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -11,6 +15,16 @@ public class App {
     ArticleController articleController;
     SystemController systemController;
     App() {
+        DBConnection.DB_NAME="proj1";
+        DBConnection.DB_PORT=3306;
+        DBConnection.DB_USER="root";
+        DBConnection.DB_PASSWORD="";
+
+       DBConnection dbConnection = new DBConnection();
+       dbConnection.connect();
+
+        List<Map<String, Object>> rs = dbConnection.selectRows("select * from article");
+        System.out.println(rs);
 
 
         articleController = new ArticleController();
