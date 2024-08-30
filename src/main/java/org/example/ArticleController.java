@@ -4,25 +4,26 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ArticleController {
+    public class ArticleController {
 
-        List<Article> articleList = new ArrayList<>();
-        int lastId = 1;
+       ArticleService articleService;
+       ArticleController(){
+          articleService = new ArticleService();
 
+
+       }
         public void write() {
             System.out.print("제목 : ");
             String subject = Container.getSc().nextLine().trim();
             System.out.print("내용 : ");
             String content = Container.getSc().nextLine().trim();
-            System.out.printf("%d번 게시물이 등록되었습니다.\n", lastId);
 
-            Article article = new Article(lastId, subject, content);
-            articleList.add(article);
-
-            lastId++;
+            int id = articleService.create(subject, content);
+            System.out.printf("%d번 게시물이 등록되었습니다.\n", id);
         }
 
         public void list () {
+            List<Article> articleList = articleService.findAll();
             System.out.println("번호 / 제목 / 내용");
             System.out.println("----------------------");
             for (int i = articleList.size() - 1; i >= 0; i--) {
