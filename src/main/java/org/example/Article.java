@@ -30,4 +30,9 @@ public class Article {
     public void setContent(String content) {
         this.content=content;
     }
+
+    public void update(Article article, String modifySubject, String modifyContent) {
+        article.setSubject(modifySubject);
+        article.setContent(modifyContent);
+    }
 }

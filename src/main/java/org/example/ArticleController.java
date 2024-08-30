@@ -40,12 +40,12 @@ import java.util.Scanner;
             return;
         }
 
-        Article article = _getFindById(id);
+        Article article = this.articleService.getFindById(id);
 
             if (article == null) {
                 System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
             } else {
-                articleList.remove(article);
+                articleService.remove(article);
                 System.out.printf("%d번 게시물이 삭제되었습니다.\n", id);
             }
         }
@@ -57,7 +57,7 @@ import java.util.Scanner;
             return;
         }
 
-        Article article = _getFindById(id);
+        Article article = this.articleService.getFindById(id);
 
             if (article == null) {
                 System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
@@ -66,27 +66,20 @@ import java.util.Scanner;
                 System.out.printf("제목(기존) : %s\n", article.getSubject());
                 System.out.print("제목 : ");
                 String modifySubject = Container.getSc().nextLine();
-                article.setSubject(modifySubject);
+
 
                 System.out.printf("내용(기존) : %s\n", article.getContent());
                 System.out.print("내용 : ");
                 String modifyContent = Container.getSc().nextLine();
-                article.setContent(modifyContent);
 
+
+                article.update(article,modifySubject, modifyContent);
                 System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
             }
         }
 
 
-        private Article _getFindById(int id) {
-            for (Article item : articleList) {
-                if (item.getId() == id) {
-                    return item;
-                }
-            }
 
-            return null;
-        }
     private int _getIntParam(String id) {
         int defaultValue = -1;
 
